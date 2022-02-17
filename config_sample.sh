@@ -1,6 +1,6 @@
 ## Version: v2.8.0
 ## Date: 2021-06-20
-## Mod: Build 20220203-002-test
+## Mod: Build 20220214-001-test
 ## Update Content: 可持续发展纲要\n1. session管理破坏性修改\n2. 配置管理可编辑config下文件\n3. 自定义脚本改为查看脚本\n4. 移除互助相关
 
 ## 上面版本号中，如果第2位数字有变化，那么代表增加了新的参数，如果只有第3位数字有变化，仅代表更新了注释，没有增加新的参数，可更新可不更新
@@ -363,9 +363,25 @@ SCANF_WXPusher_Remarks=""
 ### 格式为 UID_xxxx；查看地址：https://wxpusher.zjiecode.com/admin/main/wxuser/list
 MainWP_UID=""
 ## 13.8 扩展通知
-### 通知内容出现在正文末尾。支持 HTML 语言代码，仅支持 pushplus 、WxPusher 这些 HTML 代码通知的渠道
-### 例如：ExNotify_Content="NoLan服务器：<a href="http://服务器地址:端口?key=HeaderKey">点击访问</a>"
-ExNotify_Content=""
+### 通知内容出现在正文顶部或末尾。支持 HTML 语言代码，仅支持 pushplus 、WxPusher 这些 HTML 代码通知的渠道
+### 例如：ExNotify_Top_Content='<iframe allowtransparency="true" frameborder="0" width="100%" height="auto" scrolling="yes" src="//tianqi.2345.com/plugin/widget/index.htm?s=2&z=1&t=0&v=0&d=5&bd=0&k=&f=&ltf=009944&htf=cc0000&q=1&e=1&a=1&c=54511&w=100%&h=auto&align=center"></iframe>'
+###       ExNotify_Bot_Content='NoLan服务器：<a href="http://服务器地址:端口?key=HeaderKey">点击访问</a>'
+ExNotify_Top_Content=''
+ExNotify_Bot_Content=''
+
+## 14 Shell 版公告 notify2 环境变量
+## 14.1 读取 WxPusher UID 的方式
+### 赋值要求：填 1 表示读取青龙面板环境变量中未被禁用的 JD_COOKIE 备注中的 UID；
+###          填 2 表示读取 /ql/scripts/CK_WxPusherUid.json。必须是 ckck2 生成的带有 status 键值的版本。
+WxPusher_UID_src=''
+## 14.2 过滤已被禁用的环境变量
+### 赋值要求：填 true 表示不发送给已被禁用的环境变量；
+###          填 false 表示发送给所有环境变量。
+Filter_Disabled_Variable="true"
+## 14.3 推送通知的摘要内容(适用于WxPusher)
+NOTICE_SUMMARY=''
+## 14.4 推送通知的正文内容(适用于WxPusher)。支持 HTML 语言代码
+NOTICE_CONTENT=''
 
 ## 其他需要的变量，脚本中需要的变量使用 export 变量名= 声明即可
 
@@ -647,11 +663,11 @@ export BEANCHANGE_PERSENT="" ##10合1
 ### 	 今天天气不错...
 ### 	 
 ### 	 哥斯拉大战金刚.... 
-export BEANCHANGE_ALLNOTIFY='京东APP-秒杀-秒秒币 1月17过期,记得换哦.
-因为加了购物车抽奖脚本，所有人早上8点半会自动清理购物车。
+export BEANCHANGE_ALLNOTIFY='因为加了购物车抽奖脚本，所有人早上8点半会自动清理购物车。
 活动1：<a href="http://mtw.so/6dtM4K">京东会员权益</a>
 活动2：<a href="https://u.jd.com/YMlLsvu">晚上12点下拉页面签到得20豆</a>
 活动3：<a href="https://u.jd.com/YI7HbhU">连续签到瓜分大奖</a>
+活动4：京东APP->我的->会员店->天天领京豆->幸福小店
 <iframe allowtransparency="true" frameborder="0" width="100%" height="auto" scrolling="yes" src="//tianqi.2345.com/plugin/widget/index.htm?s=2&z=1&t=0&v=0&d=2&bd=0&k=&f=&ltf=009944&htf=cc0000&q=1&e=1&a=1&c=54511&w=100%&h=auto&align=center"></iframe>'
 ### 4. BEANCHANGE_ExJxBeans
 ### 当设定BEANCHANGE_ExJxBeans="true"且时间在17点之后，会自动将临期京豆兑换成喜豆续命.
@@ -808,6 +824,9 @@ export RES_SUB="ccwav_QLScript2&shufflewzc_faker2&Aaron-lv_sync&smiek2121_script
 ## 2、京东自动评价
 ### true为开启，false为关闭
 export JD_Evaluation="true"
+
+# 小埋
+export XFXD="true"
 
 # passerby-b
 ## 1、滴滴橙心果园
